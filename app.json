@@ -1,0 +1,12 @@
+{
+  "name": "EventBA-JS",
+  "displayName": "EventBA-JS",
+  "expo": {
+    "name": "EventBA-JS",
+    "slug": "EventBA-JS",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
