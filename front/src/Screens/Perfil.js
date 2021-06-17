@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
-import getEventsAPI from "../api/geteventsAPI";
+import getPurchasedTicketsAPI from "../api/getPurchasedTicketsAPI";
+import { FeedItem } from "../Components/FeedItem";
 
 export function Perfil({ navigation }) {
   const [eventos, setEventos] = useState("");
   const [loading, setLoading] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
     setLoading(true);
-    getEventsAPI()
+    getPurchasedTicketsAPI(user.id)
       .then((json) => {
         setEventos(json);
       })
@@ -30,9 +33,9 @@ export function Perfil({ navigation }) {
         </View>
       </View>
       <View style={{ flex: 2 }}>
-        <View style={{ borderBottomWidth: 1 }}>
-          <Text style={styles.textoNuevo}>Que hay de nuevo</Text>
-        </View>
+        <TouchableOpacity style={{ borderBottomWidth: 1 }}>
+          <Text style={styles.textoNuevo}>Eventos Comprados</Text>
+        </TouchableOpacity>
 
         {loading && (
           <View>
@@ -40,7 +43,17 @@ export function Perfil({ navigation }) {
           </View>
         )}
 
-        {!loading && <View style={{ marginLeft: 10 }}></View>}
+        {!loading && (
+          <View style={{ marginLeft: 10 }}>
+            <FlatList
+              renderItem={({ item }) => {
+                return <FeedItem item={item} navigation={navigation} />;
+              }}
+              keyExtractor={(item) => item.eventid.toString()}
+              data={eventos}
+            />
+          </View>
+        )}
       </View>
     </View>
   );

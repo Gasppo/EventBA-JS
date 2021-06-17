@@ -95,6 +95,41 @@ const deleteUser = (request, response) => {
   });
 };
 
+const purchaseTicket = (request, response) => {
+  const { userid, eventid } = request.body;
+  console.log("BODY");
+  console.log("request.body");
+
+  pool.query(
+    'INSERT INTO tickets ("userID", "eventID") VALUES ($1, $2);',
+    [userid, eventid],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+
+      response
+        .status(201)
+        .send(`Event added correctly to User ID: ${userid}\n`);
+      console.log(`Event added correctly to User ID: ${userid}\n`);
+    }
+  );
+};
+
+const getPurchasedTicketsForUser = (request, response) => {
+  const userid = request.params.id;
+  pool.query(
+    'SELECT * from events WHERE eventid in (SELECT "eventID" from tickets where "userID" = $1);',
+    [userid],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      response.status(200).json(results.rows);
+    }
+  );
+};
+
 module.exports = {
   getUsers,
   getUserById,
@@ -103,4 +138,6 @@ module.exports = {
   deleteUser,
   getEvents,
   getUserByEmail,
+  purchaseTicket,
+  getPurchasedTicketsForUser,
 };

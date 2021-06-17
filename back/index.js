@@ -16,4 +16,6 @@ app.get("/api/events", db.getEvents);
 app.get("/api/users/email/:email", db.getUserByEmail);
 app.get("/api/users/id/:id", db.getUserById);
 app.post("/api/users", db.registerUser);
+app.post("/api/events", db.purchaseTicket);
+app.get("/api/events/:id", db.getPurchasedTicketsForUser);
 app.listen(port, () => console.log(`Running on port ${port}`));

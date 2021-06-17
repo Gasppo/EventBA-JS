@@ -34,7 +34,13 @@ export function Feed({ navigation }) {
             justifyContent: "center",
           }}
         >
-          <TouchableImage text="Museo" src="Museo" onPressImg={() => {}} />
+          <TouchableImage
+            text="Museo"
+            src="Museo"
+            onPressImg={() => {
+              console.log(user);
+            }}
+          />
           <TouchableImage text="Teatro" onPressImg={() => {}} src="Teatro" />
           <TouchableImage text="Cine" src="Cine" />
           <TouchableImage text="Música" src="Musica" />

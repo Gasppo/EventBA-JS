@@ -1,10 +1,13 @@
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
+import { useSelector } from "react-redux";
+import purchaseTicketAPI from "../api/purchaseTicketAPI";
 
 export function Evento({ navigation, route }) {
+  const userid = useSelector((state) => state.user.id);
   useEffect(() => {
-    console.log(route.params.imageSource);
+    console.log(userid);
   }, []);
   return (
     <View
@@ -74,7 +77,9 @@ export function Evento({ navigation, route }) {
       </View>
       <View style={{ flex: 1, alignSelf: "center" }}>
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={() => {
+            purchaseTicketAPI(userid, route.params.item.eventid);
+          }}
           style={{
             borderRadius: 20,
             backgroundColor: "#4D418D",
