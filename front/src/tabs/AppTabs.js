@@ -5,7 +5,7 @@ import {
 } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { Entradas } from "../Screens/Entradas";
+import { LocationEvents } from "../Screens/LocationEvents";
 import { Perfil } from "../Screens/Perfil";
 import { HomeStack } from "../stacks/HomeStack";
 import { SearchStack } from "../stacks/SearchStack";
@@ -23,10 +23,10 @@ export const AppTabs = ({}) => {
             iconName = "home";
           } else if (route.name === "Buscar") {
             iconName = "search1";
-          } else if (route.name === "Entradas") {
+          } else if (route.name === "Cercanos") {
             return (
               <MaterialCommunityIcons
-                name={"ticket"}
+                name={"map-marker"}
                 size={size}
                 color={color}
               />
@@ -48,7 +48,7 @@ export const AppTabs = ({}) => {
     >
       <Tabs.Screen name="Inicio" component={HomeStack}></Tabs.Screen>
       <Tabs.Screen name="Buscar" component={SearchStack}></Tabs.Screen>
-      <Tabs.Screen name="Entradas" component={Entradas}></Tabs.Screen>
+      <Tabs.Screen name="Cercanos" component={LocationEvents}></Tabs.Screen>
       <Tabs.Screen name="Perfil" component={Perfil}></Tabs.Screen>
     </Tabs.Navigator>
   );

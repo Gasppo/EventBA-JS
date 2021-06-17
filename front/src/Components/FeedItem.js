@@ -6,11 +6,13 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 export const FeedItem = ({ item, navigation }) => {
   const [oprimido, onPressOprimido] = useState(false);
+  const imageSource = { uri: "https://picsum.photos/640/480" }
   return (
     <TouchableOpacity
       onPress={() => {
         navigation.navigate("Evento", {
           item: item,
+          imageSource: imageSource,
         });
       }}
       style={{
@@ -23,7 +25,7 @@ export const FeedItem = ({ item, navigation }) => {
     >
       <View style={{ flexDirection: "row", marginVertical: 10 }}>
         <Image
-          source={{ uri: "https://picsum.photos/640/480" }}
+          source={imageSource}
           style={{ width: 100, height: 100, marginLeft: 5, borderRadius: 5 }}
         />
         <View style={{ flexDirection: "column" }}>

@@ -1,8 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
-import React from "react";
-import { Text, View } from "react-native";
+import React, { useEffect } from "react";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 
 export function Evento({ navigation, route }) {
+  useEffect(() => {
+    console.log(route.params.imageSource);
+  }, []);
   return (
     <View
       style={{
@@ -15,15 +18,23 @@ export function Evento({ navigation, route }) {
     >
       <View
         style={{
-          flex: 1,
-          justifyContent: "flex-end",
-          borderBottomColor: "black",
-          borderBottomWidth: 1,
+          flex: 3,
+          justifyContent: "center",
+          alignSelf: "center",
+          width: "100%",
+          height: "100%",
         }}
       >
-        <Text>Parte superior</Text>
+        <Image
+          source={route.params.imageSource}
+          style={{
+            width: "130%",
+            height: "100%",
+            marginHorizontal: -30,
+          }}
+        />
       </View>
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 2 }}>
         <View style={{ flexDirection: "row", marginTop: 10 }}>
           <Ionicons
             name="heart"
@@ -60,6 +71,28 @@ export function Evento({ navigation, route }) {
           />
           <Text style={{ fontSize: 20 }}>{route.params.item.fecha}</Text>
         </View>
+      </View>
+      <View style={{ flex: 1, alignSelf: "center" }}>
+        <TouchableOpacity
+          onPress={() => {}}
+          style={{
+            borderRadius: 20,
+            backgroundColor: "#4D418D",
+            marginVertical: 40,
+            alignSelf: "center",
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 20,
+              marginVertical: 10,
+              marginHorizontal: 80,
+              color: "white",
+            }}
+          >
+            Reservar Entrada
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

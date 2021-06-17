@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }) => {
           const currUser = {
             ...userData,
           };
+          console.log('logging')
           if (password === userData.password) {
             setUser(currUser);
             console.log(`Usuario conectado: ${currUser.username}`);
@@ -33,15 +34,18 @@ export const AuthProvider = ({ children }) => {
             return false;
           }
         },
+
         loginTemp: () => {
           const fakeUser = { username: "TempUser", email: "temp@mail", id: 0 };
           setUser(fakeUser);
           dispatch(loginUser(fakeUser));
         },
+
         logout: () => {
           setUser(null);
           dispatch(loginUser({}));
         },
+        
         register: (username, email, password) => {
           if (registerAPI(username, email, password)) {
             setUser(username);

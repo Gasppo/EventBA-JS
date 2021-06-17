@@ -12,17 +12,7 @@ export const Routes = ({}) => {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    //cheacker loggeo
-    AsyncStorage.getItem("username")
-      .then((userString) => {
-        if (userString) {
-          //hacer cosas
-        }
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    user ? setLoading(false) : console.log("Couldnt load user");
   }, []);
 
   if (loading) {
