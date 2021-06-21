@@ -1,5 +1,9 @@
 {
   "devDependencies": {
     "@types/react-native": "^0.64.4"
+  },
+  "scripts": {
+    "android": "cd front && react-native run-android",
+    "server": "cd back && yarn start"
   }
 }

@@ -1,14 +1,23 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
 import purchaseTicketAPI from "../api/purchaseTicketAPI";
+import getPurchasedTicketsAPI from "../api/getPurchasedTicketsAPI";
+import cancelTicketAPI from "../api/cancelTicketAPI";
 
 export function Evento({ navigation, route }) {
   const userid = useSelector((state) => state.user.id);
+  const eventid = route.params.item.eventid;
+  const [includes, setIncludes] = useState(false);
+
   useEffect(() => {
     console.log(userid);
-  }, []);
+    getPurchasedTicketsAPI(userid).then((json) => {
+      console.log(json);
+      setIncludes(json.findIndex((element) => element.eventid == eventid) >= 0);
+    });
+  }, [includes]);
   return (
     <View
       style={{
@@ -76,28 +85,69 @@ export function Evento({ navigation, route }) {
         </View>
       </View>
       <View style={{ flex: 1, alignSelf: "center" }}>
-        <TouchableOpacity
-          onPress={() => {
-            purchaseTicketAPI(userid, route.params.item.eventid);
-          }}
-          style={{
-            borderRadius: 20,
-            backgroundColor: "#4D418D",
-            marginVertical: 40,
-            alignSelf: "center",
-          }}
-        >
-          <Text
+        {userid != 0 && !includes && (
+          <TouchableOpacity
+            onPress={() => {
+              purchaseTicketAPI(userid, route.params.item.eventid);
+              setIncludes(!includes);
+            }}
             style={{
-              fontSize: 20,
-              marginVertical: 10,
-              marginHorizontal: 80,
-              color: "white",
+              borderRadius: 20,
+              backgroundColor: "#4D418D",
+              marginVertical: 40,
+              alignSelf: "center",
             }}
           >
-            Reservar Entrada
+            <Text
+              style={{
+                fontSize: 20,
+                marginVertical: 10,
+                marginHorizontal: 80,
+                color: "white",
+              }}
+            >
+              Reservar Entrada
+            </Text>
+          </TouchableOpacity>
+        )}
+
+        {userid != 0 && includes && (
+          <TouchableOpacity
+            onPress={() => {
+              cancelTicketAPI(userid, route.params.item.eventid);
+              setIncludes(!includes);
+            }}
+            style={{
+              borderRadius: 20,
+              backgroundColor: "#D2B4DE",
+              marginVertical: 40,
+              alignSelf: "center",
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 20,
+                marginVertical: 10,
+                marginHorizontal: 80,
+                color: "white",
+              }}
+            >
+              Cancelar entrada
+            </Text>
+          </TouchableOpacity>
+        )}
+        {userid == 0 && (
+          <Text
+            style={{
+              fontSize: 15,
+              marginVertical: 10,
+
+              color: "grey",
+            }}
+          >
+            Conectarse para reservar entradas
           </Text>
-        </TouchableOpacity>
+        )}
       </View>
     </View>
   );

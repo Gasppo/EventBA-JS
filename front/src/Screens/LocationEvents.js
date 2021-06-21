@@ -1,11 +1,12 @@
 import React from "react";
-import { Text } from "react-native";
+import { View } from "react-native";
+import MapView from "react-native-maps";
 import { Centrar } from "../Components/Centrar";
 
 export function LocationEvents() {
   return (
-    <Centrar>
-      <Text> Eventos Cercanos</Text>
-    </Centrar>
+    <View>
+      <MapView />
+    </View>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 import getPurchasedTicketsAPI from "../api/getPurchasedTicketsAPI";
@@ -24,16 +24,50 @@ export function Perfil({ navigation }) {
     setLoading(false);
   }, []);
 
+  const reload = () => {
+    setLoading(true);
+    getPurchasedTicketsAPI(user.id)
+      .then((json) => {
+        setEventos(json);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setLoading(false);
+  };
+
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <View style={{ flex: 1, backgroundColor: "#eff1f8" }}>
-        <View style={{ marginLeft: 10 }}>
-          <Text style={styles.textTitle}>{user.username}</Text>
-          <Text style={styles.textSubtitle}>{user.email}</Text>
+        <View>
+          <View style={{ backgroundColor: "#4D418D" }}>
+            <Text style={styles.textTitleHeader}>{user.username}</Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: 20,
+            }}
+          >
+            <View
+              style={{ borderWidth: 1, borderRadius: 50, borderColor: "grey" }}
+            >
+              <Image
+                source={require("../img/dancer.png")}
+                style={styles.tinyLogo}
+              />
+            </View>
+            <View>
+              <Text style={styles.textTitle}>{user.username}</Text>
+              <Text style={styles.textSubtitle}>{user.email}</Text>
+            </View>
+          </View>
         </View>
       </View>
       <View style={{ flex: 2 }}>
-        <TouchableOpacity style={{ borderBottomWidth: 1 }}>
+        <TouchableOpacity onPress={reload} style={{ borderBottomWidth: 1 }}>
           <Text style={styles.textoNuevo}>Eventos Comprados</Text>
         </TouchableOpacity>
 
@@ -44,7 +78,7 @@ export function Perfil({ navigation }) {
         )}
 
         {!loading && (
-          <View style={{ marginLeft: 10 }}>
+          <View style={{ marginLeft: 10, marginBottom: 30 }}>
             <FlatList
               renderItem={({ item }) => {
                 return <FeedItem item={item} navigation={navigation} />;
@@ -83,10 +117,28 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 20,
   },
+  textTitleHeader: {
+    color: "white",
+    fontSize: 20,
+    marginVertical: 15,
+    marginLeft: 10,
+  },
   textTitle: {
     color: "#4D418D",
     fontSize: 20,
-    marginBottom: 20,
+    marginVertical: 15,
+    marginLeft: 5,
   },
-  textSubtitle: { color: "#4D418D", fontSize: 14, marginBottom: 20 },
+  tinyLogo: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+  },
+
+  textSubtitle: {
+    color: "#4D418D",
+    fontSize: 14,
+    marginBottom: 20,
+    marginLeft: 10,
+  },
 });

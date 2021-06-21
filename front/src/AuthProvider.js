@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
           const currUser = {
             ...userData,
           };
-          console.log('logging')
+          console.log("logging");
           if (password === userData.password) {
             setUser(currUser);
             console.log(`Usuario conectado: ${currUser.username}`);
@@ -45,11 +45,14 @@ export const AuthProvider = ({ children }) => {
           setUser(null);
           dispatch(loginUser({}));
         },
-        
-        register: (username, email, password) => {
-          if (registerAPI(username, email, password)) {
+
+        register: async (username, email, password) => {
+          const newId = await registerAPI(username, email, password);
+          if (newId) {
             setUser(username);
-            dispatch(loginUser({ username: username, email: email, id: 0 }));
+            dispatch(
+              loginUser({ username: username, email: email, id: newId })
+            );
           } else {
             return false;
           }

@@ -9,6 +9,7 @@ export function Search({ navigation }) {
   const [eventos, setEventos] = useState("");
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
+  const [metaquery, setMetaquery] = useState("");
 
   useEffect(() => {
     setLoading(true);
@@ -36,10 +37,34 @@ export function Search({ navigation }) {
           />
         </View>
         <View style={styles.viewCentered}>
-          <TouchableImage text="Museo" src="Museo" />
-          <TouchableImage text="Teatro" onPressImg={() => {}} src="Teatro" />
-          <TouchableImage text="Cine" src="Cine" />
-          <TouchableImage text="Música" src="Musica" />
+          <TouchableImage
+            text="Museo"
+            src="Museo"
+            onPressImg={() => {
+              metaquery == "Museo" ? setMetaquery("") : setMetaquery("Museo");
+            }}
+          />
+          <TouchableImage
+            text="Teatro"
+            onPressImg={() => {
+              metaquery == "Teatro" ? setMetaquery("") : setMetaquery("Teatro");
+            }}
+            src="Teatro"
+          />
+          <TouchableImage
+            text="Cine"
+            onPressImg={() => {
+              metaquery == "Cine" ? setMetaquery("") : setMetaquery("Cine");
+            }}
+            src="Cine"
+          />
+          <TouchableImage
+            text="Música"
+            onPressImg={() => {
+              metaquery == "Musica" ? setMetaquery("") : setMetaquery("Musica");
+            }}
+            src="Musica"
+          />
         </View>
       </View>
       <View style={{ flex: 2 }}>
@@ -61,11 +86,17 @@ export function Search({ navigation }) {
             keyExtractor={(item) => item.eventid.toString()}
             data={
               eventos
-                ? eventos.filter((evento) =>
-                    JSON.stringify(evento)
-                      .toLowerCase()
-                      .includes(query.toLowerCase())
-                  )
+                ? eventos
+                    .filter((evento) => {
+                      return JSON.stringify(evento)
+                        .toLowerCase()
+                        .includes(query.toLowerCase());
+                    })
+                    .filter((evento) => {
+                      return JSON.stringify(evento)
+                        .toLowerCase()
+                        .includes(metaquery.toLowerCase());
+                    })
                 : []
             }
           />

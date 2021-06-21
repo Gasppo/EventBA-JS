@@ -3,10 +3,17 @@ import Moment from "moment";
 import React, { useState } from "react";
 import { Image, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { API_SERVER } from "../constants";
 
 export const FeedItem = ({ item, navigation }) => {
   const [oprimido, onPressOprimido] = useState(false);
-  const imageSource = { uri: "https://picsum.photos/640/480" }
+
+  const imageSource = {
+    uri: item.imagen
+      ? `http://${API_SERVER}:5000/static/${item.imagen}`
+      : "https://picsum.photos/640/480",
+  };
+
   return (
     <TouchableOpacity
       onPress={() => {

@@ -55,14 +55,15 @@ const getUserByEmail = (request, response) => {
 const registerUser = (request, response) => {
   const { username, email, password } = request.body;
   pool.query(
-    "INSERT INTO users (username, email, password) VALUES ($1, $2, $3);",
+    "INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id;",
     [username, email, password],
     (error, results) => {
       if (error) {
         throw error;
       }
 
-      response.status(201).send(`User ${username} added correctly\n`);
+      response.status(201).json(results.rows);
+
       console.log(`User ${username} added correctly`);
     }
   );
@@ -116,6 +117,27 @@ const purchaseTicket = (request, response) => {
   );
 };
 
+const cancelTicket = (request, response) => {
+  const { userid, eventid } = request.body;
+  console.log("BODY");
+  console.log("request.body");
+
+  pool.query(
+    'DELETE FROM tickets where "userID" = $1 and "eventID" = $2;',
+    [userid, eventid],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+
+      response
+        .status(201)
+        .send(`Event removed correctly to User ID: ${userid}\n`);
+      console.log(`Event removed correctly to User ID: ${userid}\n`);
+    }
+  );
+};
+
 const getPurchasedTicketsForUser = (request, response) => {
   const userid = request.params.id;
   pool.query(
@@ -140,4 +162,5 @@ module.exports = {
   getUserByEmail,
   purchaseTicket,
   getPurchasedTicketsForUser,
+  cancelTicket,
 };
