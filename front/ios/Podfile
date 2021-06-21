@@ -18,4 +18,6 @@ target 'EventBAJS' do
   #     flipper_post_install(installer)
   #   end
   # end
+  pod 'react-native-maps', :path => '../node_modules/react-native-maps'
+
 end

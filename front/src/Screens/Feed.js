@@ -41,7 +41,13 @@ export function Feed({ navigation }) {
               console.log(user);
             }}
           />
-          <TouchableImage text="Teatro" src="Teatro" />
+          <TouchableImage
+            text="Teatro"
+            src="Teatro"
+            onPressImg={() => {
+              console.log(eventos[0]);
+            }}
+          />
           <TouchableImage text="Cine" src="Cine" />
           <TouchableImage text="Música" src="Musica" />
         </View>
