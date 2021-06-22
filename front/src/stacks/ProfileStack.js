@@ -4,15 +4,16 @@ import React, { useContext } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { AuthContext } from "../AuthProvider";
 import { Evento } from "../Screens/Evento";
+import { Perfil } from "../Screens/Perfil";
 import { Search } from "../Screens/Search";
 
 const Stack = createStackNavigator();
 
-export const SearchStack = ({}) => {
+export const ProfileStack = ({}) => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Search"
+        name="Profile"
         options={{
           headerTitle: () => null,
           headerStyle: {
@@ -49,7 +50,7 @@ export const SearchStack = ({}) => {
             );
           },
         }}
-        component={Search}
+        component={Perfil}
       />
       <Stack.Screen
         options={({ navigation, route }) => ({

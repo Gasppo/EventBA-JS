@@ -4,52 +4,20 @@ import React, { useContext } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { AuthContext } from "../AuthProvider";
 import { Evento } from "../Screens/Evento";
+import { LocationEvents } from "../Screens/LocationEvents";
 import { Search } from "../Screens/Search";
 
 const Stack = createStackNavigator();
 
-export const SearchStack = ({}) => {
+export const LocationStack = ({}) => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Search"
+        name="Map"
         options={{
-          headerTitle: () => null,
-          headerStyle: {
-            backgroundColor: "#4D418D",
-          },
-          headerRight: () => {
-            const { logout } = useContext(AuthContext);
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  logout();
-                }}
-              >
-                <MaterialCommunityIcons
-                  name={"logout"}
-                  size={30}
-                  color={"white"}
-                />
-              </TouchableOpacity>
-            );
-          },
-          headerLeft: () => {
-            return (
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  marginLeft: 10,
-                  fontSize: 18,
-                  color: "white",
-                }}
-              >
-                EventBA
-              </Text>
-            );
-          },
+          headerShown: false,
         }}
-        component={Search}
+        component={LocationEvents}
       />
       <Stack.Screen
         options={({ navigation, route }) => ({

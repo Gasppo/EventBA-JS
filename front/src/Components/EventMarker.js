@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Image } from "react-native";
 import { Marker } from "react-native-maps";
-import { API_KEY } from "../constants";
+import { API_KEY, API_SERVER } from "../constants";
 
-export const EventMarker = ({ event }) => {
+export const EventMarker = ({ navigation, event }) => {
   const [coord, setCoord] = useState({
     latitude: 0,
     longitude: 0,
@@ -12,6 +13,7 @@ export const EventMarker = ({ event }) => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
+    console.log("Loading...");
     address = event.ubicacion.replace(" ", "%20");
     fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${API_KEY}`
@@ -32,11 +34,22 @@ export const EventMarker = ({ event }) => {
     <>
       {!loading && (
         <Marker
+          onPress={() => {
+            navigation.navigate("Evento", {
+              item: event,
+              imageSource: {
+                uri: event.imagen
+                  ? `http://${API_SERVER}:5000/static/${event.imagen}`
+                  : "https://picsum.photos/640/480",
+              },
+            });
+          }}
           key={event.eventid}
           coordinate={coord}
           title={event.nombre}
-          description={event.descripcion}
-        />
+          description={`${event.descripcion} - ${event.fecha}`}
+          pinColor={"#4D418D"}
+        ></Marker>
       )}
     </>
   );

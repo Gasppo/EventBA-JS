@@ -9,9 +9,10 @@ import { Text } from "react-native";
 import { EventMarker } from "../Components/EventMarker";
 import { useEffect } from "react";
 import getEventsAPI from "../api/geteventsAPI";
+import { Image } from "react-native";
 const { height, width } = Dimensions.get("window");
 
-export function LocationEvents() {
+export function LocationEvents({ navigation }) {
   const [region, setRegion] = useState({
     latitude: -34.563508228992,
     longitude: -58.443121667171155,
@@ -24,7 +25,6 @@ export function LocationEvents() {
   useEffect(() => {
     getEventsAPI()
       .then((json) => {
-        console.log(json);
         setEventos(json);
       })
       .catch((err) => {
@@ -56,9 +56,18 @@ export function LocationEvents() {
   return (
     <>
       <MapView style={styles.map} region={region}>
-        {eventos && eventos.map((evento) => <EventMarker event={evento} />)}
+        <Marker coordinate={region} key={0}>
+          <Image
+            source={require("../img/personal-location.png")}
+            style={{ height: 20, width: 20 }}
+          />
+        </Marker>
+        {eventos.length > 0 &&
+          eventos.map((evento) => (
+            <EventMarker event={evento} navigation={navigation} />
+          ))}
       </MapView>
-      <View style={{ position: "absolute", top: 10, width: "100%" }}>
+      {/* <View style={{ position: "absolute", top: 10, width: "100%" }}>
         <TextInput
           style={{
             borderRadius: 10,
@@ -79,7 +88,7 @@ export function LocationEvents() {
         <TouchableOpacity onPress={submitadress}>
           <Text>Hola</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </>
   );
 }

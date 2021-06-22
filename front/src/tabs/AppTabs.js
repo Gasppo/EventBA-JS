@@ -8,6 +8,8 @@ import React from "react";
 import { LocationEvents } from "../Screens/LocationEvents";
 import { Perfil } from "../Screens/Perfil";
 import { HomeStack } from "../stacks/HomeStack";
+import { LocationStack } from "../stacks/LocationStack";
+import { ProfileStack } from "../stacks/ProfileStack";
 import { SearchStack } from "../stacks/SearchStack";
 
 const Tabs = createBottomTabNavigator();
@@ -48,8 +50,8 @@ export const AppTabs = ({}) => {
     >
       <Tabs.Screen name="Inicio" component={HomeStack}></Tabs.Screen>
       <Tabs.Screen name="Buscar" component={SearchStack}></Tabs.Screen>
-      <Tabs.Screen name="Cercanos" component={LocationEvents}></Tabs.Screen>
-      <Tabs.Screen name="Perfil" component={Perfil}></Tabs.Screen>
+      <Tabs.Screen name="Cercanos" component={LocationStack}></Tabs.Screen>
+      <Tabs.Screen name="Perfil" component={ProfileStack}></Tabs.Screen>
     </Tabs.Navigator>
   );
 };

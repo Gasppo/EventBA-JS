@@ -40,15 +40,12 @@ export function Perfil({ navigation }) {
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <View style={{ flex: 1, backgroundColor: "#eff1f8" }}>
         <View>
-          <View style={{ backgroundColor: "#4D418D" }}>
-            <Text style={styles.textTitleHeader}>{user.username}</Text>
-          </View>
           <View
             style={{
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "center",
-              marginTop: 20,
+              marginTop: 50,
             }}
           >
             <View

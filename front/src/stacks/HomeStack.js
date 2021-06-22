@@ -81,7 +81,7 @@ export const HomeStack = ({}) => {
                     color: "white",
                   }}
                 >
-                  {route.params.eventID}
+                  {route.params.item.nombre}
                 </Text>
               </View>
             );

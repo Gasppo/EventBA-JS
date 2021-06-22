@@ -4,6 +4,7 @@ import { AuthContext } from "../AuthProvider";
 import { Centrar } from "../Components/Centrar";
 
 export function Login({ navigation, route }) {
+  const asd = process.env.REACT_APP_API_SERVER;
   const { loginTemp } = useContext(AuthContext);
   return (
     <Centrar>
@@ -49,15 +50,7 @@ export function Login({ navigation, route }) {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          fetch(`http://192.168.0.151:5000/api/users`)
-            .then((res) => res.json())
-            .then((json) => {
-              console.log(json);
-            })
-            .catch((err) => {
-              console.log(err);
-              return false;
-            });
+          console.log(process.env.REACT_APP_API_SERVER);
         }}
       >
         <Text style={{ color: "#4D418D", marginBottom: 10 }}>
