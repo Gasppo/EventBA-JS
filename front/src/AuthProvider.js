@@ -21,16 +21,21 @@ export const AuthProvider = ({ children }) => {
         user,
         login: async (email, password) => {
           const userData = await loginAPI(email);
-          const currUser = {
-            ...userData,
-          };
-          console.log("logging");
-          if (password === userData.password) {
-            setUser(currUser);
-            console.log(`Usuario conectado: ${currUser.username}`);
-            dispatch(loginUser(currUser));
+          if (userData) {
+            const currUser = {
+              ...userData,
+            };
+            console.log("logging");
+            if (password === userData.password) {
+              setUser(currUser);
+              console.log(`Usuario conectado: ${currUser.username}`);
+              dispatch(loginUser(currUser));
+            } else {
+              alert("Clave Incorrecta");
+              return false;
+            }
           } else {
-            alert("Clave Incorrecta");
+            alert("Usuario no encontrado");
             return false;
           }
         },

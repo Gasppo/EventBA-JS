@@ -48,15 +48,9 @@ export function Login({ navigation, route }) {
           Iniciar sesión
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          console.log(process.env.REACT_APP_API_SERVER);
-        }}
-      >
-        <Text style={{ color: "#4D418D", marginBottom: 10 }}>
-          ¿No tenes una cuenta?
-        </Text>
-      </TouchableOpacity>
+      <Text style={{ color: "#4D418D", marginBottom: 10 }}>
+        ¿No tenes una cuenta?
+      </Text>
       <TouchableOpacity
         onPress={() => {
           navigation.navigate("Register");

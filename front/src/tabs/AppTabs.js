@@ -3,24 +3,24 @@ import {
   FontAwesome5,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import React from "react";
-import { LocationEvents } from "../Screens/LocationEvents";
-import { Perfil } from "../Screens/Perfil";
 import { HomeStack } from "../stacks/HomeStack";
 import { LocationStack } from "../stacks/LocationStack";
 import { ProfileStack } from "../stacks/ProfileStack";
 import { SearchStack } from "../stacks/SearchStack";
 
-const Tabs = createBottomTabNavigator();
+const Tabs = createMaterialTopTabNavigator();
 
 export const AppTabs = ({}) => {
   return (
     <Tabs.Navigator
+      swipeEnabled={true}
+      tabBarPosition="bottom"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-
+          let actualSize = 20;
           if (route.name === "Inicio") {
             iconName = "home";
           } else if (route.name === "Buscar") {
@@ -29,23 +29,28 @@ export const AppTabs = ({}) => {
             return (
               <MaterialCommunityIcons
                 name={"map-marker"}
-                size={size}
+                size={actualSize}
                 color={color}
               />
             );
           } else if (route.name === "Perfil") {
             return (
-              <FontAwesome5 name={"user-circle"} size={size} color={color} />
+              <FontAwesome5
+                name={"user-circle"}
+                size={actualSize}
+                color={color}
+              />
             );
           }
 
-          // You can return any component that you like here!
-          return <AntDesign name={iconName} size={size} color={color} />;
+          return <AntDesign name={iconName} size={actualSize} color={color} />;
         },
       })}
       tabBarOptions={{
         activeTintColor: "#4D418D",
         inactiveTintColor: "gray",
+        showIcon: true,
+        showLabel: false,
       }}
     >
       <Tabs.Screen name="Inicio" component={HomeStack}></Tabs.Screen>

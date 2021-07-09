@@ -15,7 +15,40 @@ export const LocationStack = ({}) => {
       <Stack.Screen
         name="Map"
         options={{
-          headerShown: false,
+          headerTitle: () => null,
+          headerStyle: {
+            backgroundColor: "#4D418D",
+          },
+          headerRight: () => {
+            const { logout } = useContext(AuthContext);
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  logout();
+                }}
+              >
+                <MaterialCommunityIcons
+                  name={"logout"}
+                  size={30}
+                  color={"white"}
+                />
+              </TouchableOpacity>
+            );
+          },
+          headerLeft: () => {
+            return (
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  marginLeft: 10,
+                  fontSize: 18,
+                  color: "white",
+                }}
+              >
+                EventBA
+              </Text>
+            );
+          },
         }}
         component={LocationEvents}
       />

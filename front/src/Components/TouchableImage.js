@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
@@ -14,8 +14,29 @@ const images = {
 };
 
 export const TouchableImage = ({ text, src, onPressImg }) => {
+  const [selected, setSelected] = useState(false);
+
+  const styles = StyleSheet.create({
+    tinyLogo: {
+      width: 65,
+      height: 65,
+    },
+    logoContainer: {
+      borderWidth: selected ? 2 : 0.5,
+      borderRadius: 5,
+      padding: 10,
+      borderColor: selected ? "#4D418D" : "grey",
+    },
+  });
+
   return (
-    <TouchableOpacity style={{ marginHorizontal: 5 }} onPress={onPressImg}>
+    <TouchableOpacity
+      style={{ marginHorizontal: 5 }}
+      onPress={() => {
+        setSelected((prev) => !prev);
+        onPressImg();
+      }}
+    >
       <View style={styles.logoContainer}>
         <Image source={images[src]} style={styles.tinyLogo} />
       </View>
@@ -23,15 +44,3 @@ export const TouchableImage = ({ text, src, onPressImg }) => {
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  tinyLogo: {
-    width: 65,
-    height: 65,
-  },
-  logoContainer: {
-    borderWidth: 0.5,
-    borderRadius: 5,
-    padding: 10,
-  },
-});

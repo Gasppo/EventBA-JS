@@ -92,7 +92,6 @@ export function Register({ navigation, route }) {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          register(user, email, password);
           navigation.navigate("Login");
         }}
       >

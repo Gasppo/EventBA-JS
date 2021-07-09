@@ -3,8 +3,8 @@ import { Text, View } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 import getEventsAPI from "../api/geteventsAPI";
+import { CarouselItem } from "../Components/CarouselItem";
 import { FeedItem } from "../Components/FeedItem";
-import { TouchableImage } from "../Components/TouchableImage";
 
 export function Feed({ navigation }) {
   const [eventos, setEventos] = useState("");
@@ -26,44 +26,17 @@ export function Feed({ navigation }) {
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <View style={{ flex: 1 }}>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <TouchableImage
-            text="Museo"
-            src="Museo"
-            onPressImg={() => {
-              console.log(user);
+        {!loading && (
+          <FlatList
+            horizontal
+            pagingEnabled
+            renderItem={({ item }) => {
+              return <CarouselItem item={item} navigation={navigation} />;
             }}
+            keyExtractor={(item) => item.eventid.toString()}
+            data={eventos.sort(() => 0.5 - Math.random()).slice(0, 5)}
           />
-          <TouchableImage
-            text="Teatro"
-            src="Teatro"
-            onPressImg={() => {
-              console.log(eventos[0]);
-            }}
-          />
-          <TouchableImage text="Cine" src="Cine" />
-          <TouchableImage text="Música" src="Musica" />
-        </View>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <TouchableImage text="Foto" src="Foto" />
-          <TouchableImage text="Cultura" src="Cultura" />
-          <TouchableImage text="Exterior" src="Exterior" />
-          <TouchableImage text="Danza" src="Danza" />
-        </View>
+        )}
       </View>
       <View style={{ flex: 1 }}>
         <View style={{ borderBottomWidth: 1 }}>

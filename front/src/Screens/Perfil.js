@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 import getPurchasedTicketsAPI from "../api/getPurchasedTicketsAPI";
+import { Centrar } from "../Components/Centrar";
 import { FeedItem } from "../Components/FeedItem";
 
 export function Perfil({ navigation }) {
@@ -64,7 +65,12 @@ export function Perfil({ navigation }) {
         </View>
       </View>
       <View style={{ flex: 2 }}>
-        <TouchableOpacity onPress={reload} style={{ borderBottomWidth: 1 }}>
+        <TouchableOpacity
+          onPress={() => {
+            console.log(user);
+          }}
+          style={{ borderBottomWidth: 1 }}
+        >
           <Text style={styles.textoNuevo}>Eventos Comprados</Text>
         </TouchableOpacity>
 
@@ -84,6 +90,20 @@ export function Perfil({ navigation }) {
               data={eventos}
             />
           </View>
+        )}
+
+        {!loading && user.username === "TempUser" && (
+          <Centrar>
+            <Text
+              style={{
+                marginHorizontal: 10,
+                textAlign: "center",
+                fontSize: 20,
+              }}
+            >
+              Debe conectarse con su usuario para poder visualizar sus reservas
+            </Text>
+          </Centrar>
         )}
       </View>
     </View>
