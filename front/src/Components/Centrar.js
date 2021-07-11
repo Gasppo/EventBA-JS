@@ -1,22 +1,19 @@
 import React from "react";
 import { Dimensions, View } from "react-native";
+import * as Animateable from "react-native-animatable";
 
 export const Centrar = ({ children }) => {
-
-  const windowWidth = Dimensions.get('window').width;
-  const windowHeight = Dimensions.get('window').height;
-
-
   return (
-    <View
+    <Animateable.View
       style={{
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "white",
       }}
+      animation="fadeIn"
     >
       {children}
-    </View>
+    </Animateable.View>
   );
 };

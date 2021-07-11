@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
 import purchaseTicketAPI from "../api/purchaseTicketAPI";
 import getPurchasedTicketsAPI from "../api/getPurchasedTicketsAPI";
@@ -47,42 +47,46 @@ export function Evento({ navigation, route }) {
         />
       </View>
       <View style={{ flex: 2 }}>
-        <View style={{ flexDirection: "row", marginTop: 10 }}>
-          <Ionicons
-            name="heart"
-            size={24}
-            color="#4D418D"
-            style={{ marginRight: 10 }}
-          />
-          <Text style={{ fontSize: 20 }}>{route.params.item.rating}</Text>
-        </View>
-        <View style={{ flexDirection: "row", marginTop: 10 }}>
-          <Ionicons
-            name="globe-sharp"
-            size={24}
-            color="#4D418D"
-            style={{ marginRight: 10 }}
-          />
-          <Text style={{ fontSize: 20 }}>{route.params.item.descripcion}</Text>
-        </View>
-        <View style={{ flexDirection: "row", marginTop: 10 }}>
-          <Ionicons
-            name="location-sharp"
-            size={24}
-            color="#4D418D"
-            style={{ marginRight: 10 }}
-          />
-          <Text style={{ fontSize: 20 }}>{route.params.item.ubicacion}</Text>
-        </View>
-        <View style={{ flexDirection: "row", marginTop: 10 }}>
-          <Ionicons
-            name="calendar-sharp"
-            size={24}
-            color="#4D418D"
-            style={{ marginRight: 10 }}
-          />
-          <Text style={{ fontSize: 20 }}>{route.params.item.fecha}</Text>
-        </View>
+        <ScrollView>
+          <View style={{ flexDirection: "row", marginTop: 10 }}>
+            <Ionicons
+              name="heart"
+              size={24}
+              color="#4D418D"
+              style={{ marginRight: 10 }}
+            />
+            <Text style={{ fontSize: 20 }}>{route.params.item.rating}</Text>
+          </View>
+          <View style={{ flexDirection: "row", marginTop: 10 }}>
+            <Ionicons
+              name="location-sharp"
+              size={24}
+              color="#4D418D"
+              style={{ marginRight: 10 }}
+            />
+            <Text style={{ fontSize: 20 }}>{route.params.item.ubicacion}</Text>
+          </View>
+          <View style={{ flexDirection: "row", marginTop: 10 }}>
+            <Ionicons
+              name="calendar-sharp"
+              size={24}
+              color="#4D418D"
+              style={{ marginRight: 10 }}
+            />
+            <Text style={{ fontSize: 20 }}>{route.params.item.fecha}</Text>
+          </View>
+          <View style={{ flexDirection: "row", marginTop: 10 }}>
+            <Ionicons
+              name="globe-sharp"
+              size={24}
+              color="#4D418D"
+              style={{ marginRight: 10 }}
+            />
+            <Text style={{ fontSize: 16, width: "85%", textAlign: "justify" }}>
+              {route.params.item.descripcion}
+            </Text>
+          </View>
+        </ScrollView>
       </View>
       <View style={{ flex: 1, alignSelf: "center" }}>
         {userid != 0 && !includes && (

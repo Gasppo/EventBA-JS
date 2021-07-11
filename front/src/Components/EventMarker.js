@@ -47,7 +47,7 @@ export const EventMarker = ({ navigation, event }) => {
           key={event.eventid}
           coordinate={coord}
           title={event.nombre}
-          description={`${event.descripcion} - ${event.fecha}`}
+          description={`${event.fecha}`}
           pinColor={"#4D418D"}
         ></Marker>
       )}
