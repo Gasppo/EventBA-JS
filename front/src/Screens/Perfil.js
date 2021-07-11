@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { Image, StyleSheet, Text, View, FlatList } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 import getPurchasedTicketsAPI from "../api/getPurchasedTicketsAPI";
 import { Centrar } from "../Components/Centrar";
@@ -27,6 +27,7 @@ export function Perfil({ navigation }) {
 
   const reload = () => {
     setLoading(true);
+    setRefresh(true);
     getPurchasedTicketsAPI(user.id)
       .then((json) => {
         setEventos(json);
@@ -35,6 +36,7 @@ export function Perfil({ navigation }) {
         console.log(err);
       });
     setLoading(false);
+    setRefresh(false);
   };
 
   return (
@@ -67,7 +69,7 @@ export function Perfil({ navigation }) {
       <View style={{ flex: 2 }}>
         <TouchableOpacity
           onPress={() => {
-            console.log(user);
+            reload();
           }}
           style={{ borderBottomWidth: 1 }}
         >
@@ -88,6 +90,8 @@ export function Perfil({ navigation }) {
               }}
               keyExtractor={(item) => item.eventid.toString()}
               data={eventos}
+              onRefresh={() => reload()}
+              refreshing={refresh}
             />
           </View>
         )}

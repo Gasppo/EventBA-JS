@@ -4,7 +4,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { API_SERVER } from "../constants";
 
 export const CarouselItem = ({ item, navigation }) => {
-  const [oprimido, onPressOprimido] = useState(false);
   const windowWidth = Dimensions.get("window").width;
   const imageSource = {
     uri: item.imagen
@@ -39,8 +38,15 @@ export const CarouselItem = ({ item, navigation }) => {
           alignItems: "center",
         }}
       >
-        <Text style={{ color: "white", backgroundColor: "black" }}>
-          {item.nombre}
+        <Text
+          style={{
+            color: "white",
+            backgroundColor: "black",
+            width: 300,
+            textAlign: "center",
+          }}
+        >
+          {item.nombre} - {item.organizacion}
         </Text>
       </ImageBackground>
     </TouchableOpacity>

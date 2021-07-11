@@ -41,27 +41,35 @@ export function Search({ navigation }) {
             text="Museo"
             src="Museo"
             onPressImg={() => {
-              metaquery == "Museo" ? setMetaquery("") : setMetaquery("Museo");
+              metaquery.includes("museo")
+                ? setMetaquery((prev) => prev.replace("museo", ""))
+                : setMetaquery((prev) => prev + "museo");
             }}
           />
           <TouchableImage
             text="Teatro"
             onPressImg={() => {
-              metaquery == "Teatro" ? setMetaquery("") : setMetaquery("Teatro");
+              metaquery.includes("teatro")
+                ? setMetaquery((prev) => prev.replace("teatro", ""))
+                : setMetaquery((prev) => prev + "teatro");
             }}
             src="Teatro"
           />
           <TouchableImage
             text="Cine"
             onPressImg={() => {
-              metaquery == "Cine" ? setMetaquery("") : setMetaquery("Cine");
+              metaquery.includes("cine")
+                ? setMetaquery((prev) => prev.replace("cine", ""))
+                : setMetaquery((prev) => prev + "cine");
             }}
             src="Cine"
           />
           <TouchableImage
             text="Música"
             onPressImg={() => {
-              metaquery == "Musica" ? setMetaquery("") : setMetaquery("Musica");
+              metaquery.includes("musica")
+                ? setMetaquery((prev) => prev.replace("musica", ""))
+                : setMetaquery((prev) => prev + "musica");
             }}
             src="Musica"
           />
