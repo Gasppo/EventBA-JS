@@ -12,9 +12,7 @@ export function Evento({ navigation, route }) {
   const [includes, setIncludes] = useState(false);
 
   useEffect(() => {
-    console.log(userid);
     getPurchasedTicketsAPI(userid).then((json) => {
-      console.log(json);
       setIncludes(json.findIndex((element) => element.eventid == eventid) >= 0);
     });
   }, [includes]);
@@ -94,6 +92,7 @@ export function Evento({ navigation, route }) {
             onPress={() => {
               purchaseTicketAPI(userid, route.params.item.eventid);
               setIncludes(!includes);
+              navigation.goBack();
             }}
             style={{
               borderRadius: 20,

@@ -101,7 +101,7 @@ export function Search({ navigation }) {
                         .includes(query.toLowerCase());
                     })
                     .filter((evento) => {
-                      return JSON.stringify(evento)
+                      return JSON.stringify(evento.metatags)
                         .toLowerCase()
                         .includes(metaquery.toLowerCase());
                     })

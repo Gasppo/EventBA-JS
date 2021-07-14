@@ -98,8 +98,6 @@ const deleteUser = (request, response) => {
 
 const purchaseTicket = (request, response) => {
   const { userid, eventid } = request.body;
-  console.log("BODY");
-  console.log("request.body");
 
   pool.query(
     'INSERT INTO tickets ("userID", "eventID") VALUES ($1, $2);',
@@ -119,8 +117,6 @@ const purchaseTicket = (request, response) => {
 
 const cancelTicket = (request, response) => {
   const { userid, eventid } = request.body;
-  console.log("BODY");
-  console.log("request.body");
 
   pool.query(
     'DELETE FROM tickets where "userID" = $1 and "eventID" = $2;',
