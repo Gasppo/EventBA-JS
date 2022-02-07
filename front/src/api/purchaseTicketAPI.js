@@ -11,8 +11,6 @@ export default function purchaseTicketAPI(userid, eventid) {
     }),
   })
     .then((res) => res.json())
-    .then((json) => {
-      console.log(json);
-    })
-    .catch((err) => console.log(err));
+    .then((json) => {})
+    .catch((err) => console.log(""));
 }

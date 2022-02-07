@@ -5,7 +5,6 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { AuthContext } from "../AuthProvider";
 import { Evento } from "../Screens/Evento";
 import { Perfil } from "../Screens/Perfil";
-import { Search } from "../Screens/Search";
 
 const Stack = createStackNavigator();
 

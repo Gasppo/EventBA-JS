@@ -4,7 +4,6 @@ import { AuthContext } from "../AuthProvider";
 import { Centrar } from "../Components/Centrar";
 
 export function Login({ navigation, route }) {
-  const asd = process.env.REACT_APP_API_SERVER;
   const { loginTemp } = useContext(AuthContext);
   return (
     <Centrar>

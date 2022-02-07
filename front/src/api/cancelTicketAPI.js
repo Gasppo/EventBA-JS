@@ -1,7 +1,6 @@
 import { API_SERVER } from "../constants";
 
 export default function cancelTicketAPI(userid, eventid) {
-  console.log(userid);
   return fetch(`http://${API_SERVER}:5000/api/events/cancel`, {
     method: "POST",
     headers: { Accept: "application/json", "Content-Type": "application/json" },
@@ -14,5 +13,5 @@ export default function cancelTicketAPI(userid, eventid) {
     .then((json) => {
       console.log(json);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(""));
 }

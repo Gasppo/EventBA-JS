@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Image } from "react-native";
 import { Marker } from "react-native-maps";
 import { API_KEY, API_SERVER } from "../constants";
 
@@ -13,7 +12,6 @@ export const EventMarker = ({ navigation, event }) => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
-    console.log("Loading...");
     address = event.ubicacion.replace(" ", "%20");
     fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${API_KEY}`

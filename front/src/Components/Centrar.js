@@ -1,5 +1,4 @@
 import React from "react";
-import { Dimensions, View } from "react-native";
 import * as Animateable from "react-native-animatable";
 
 export const Centrar = ({ children }) => {

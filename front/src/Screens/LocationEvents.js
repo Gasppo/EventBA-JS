@@ -1,15 +1,8 @@
-import React from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Dimensions, Image, StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
-import { TextInput } from "react-native-gesture-handler";
-import { useState } from "react";
-import { API_KEY } from "../constants";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Text } from "react-native";
-import { EventMarker } from "../Components/EventMarker";
-import { useEffect } from "react";
 import getEventsAPI from "../api/geteventsAPI";
-import { Image } from "react-native";
+import { EventMarker } from "../Components/EventMarker";
 const { height, width } = Dimensions.get("window");
 
 export function LocationEvents({ navigation }) {
@@ -19,7 +12,6 @@ export function LocationEvents({ navigation }) {
     latitudeDelta: 0.1,
     longitudeDelta: (0.1 * width) / height,
   });
-  const [addressQuery, setAddressQuery] = useState("");
   const [eventos, setEventos] = useState("");
 
   useEffect(() => {
@@ -31,27 +23,6 @@ export function LocationEvents({ navigation }) {
         console.log(err);
       });
   }, []);
-
-  const submitadress = () => {
-    getCoord(addressQuery);
-    console.log(region);
-  };
-
-  const getCoord = (address) => {
-    address = address.replace(" ", "%20");
-    fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${API_KEY}`
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json.results[0].geometry.location);
-        setRegion({
-          ...region,
-          latitude: json.results[0].geometry.location.lat,
-          longitude: json.results[0].geometry.location.lng,
-        });
-      });
-  };
 
   return (
     <>
@@ -67,28 +38,6 @@ export function LocationEvents({ navigation }) {
             <EventMarker event={evento} navigation={navigation} />
           ))}
       </MapView>
-      {/* <View style={{ position: "absolute", top: 10, width: "100%" }}>
-        <TextInput
-          style={{
-            borderRadius: 10,
-            margin: 10,
-            color: "#000",
-            borderColor: "#666",
-            backgroundColor: "#FFF",
-            borderWidth: 1,
-            height: 45,
-            paddingHorizontal: 10,
-            fontSize: 18,
-          }}
-          onChangeText={(text) => {
-            setAddressQuery(text);
-          }}
-          value={addressQuery}
-        />
-        <TouchableOpacity onPress={submitadress}>
-          <Text>Hola</Text>
-        </TouchableOpacity>
-      </View> */}
     </>
   );
 }
